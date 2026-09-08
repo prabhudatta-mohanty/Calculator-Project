@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator App</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <h1>My Calculator</h1>
+
+        <input type="number" id="num1" placeholder="Enter first number">
+
+        <input type="number" id="num2" placeholder="Enter second number">
+
+        <br><br>
+
+        <div class="button-grid">
+
+            <button class="add-btn" onclick="calculate('add')">＋ Add</button>
+            <button class="subtract-btn" onclick="calculate('subtract')">− Subtract</button>
+            <button class="multiply-btn" onclick="calculate('multiply')">× Multiply</button>
+            <button class="divide-btn" onclick="calculate('divide')">÷ Divide</button>
+            <button class="remainder-btn" onclick="calculate('remainder')">% Remainder</button>
+            <button class="power-btn" onclick="calculate('power')">^ Power</button>
+
+        </div>
+
+        <h2 id="result">Result: </h2>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

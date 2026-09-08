@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 25px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+input {
+    width: 90%;
+    padding: 13px;
+    margin: 7px 0;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 6px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    width: 100%;
+    min-height: 50px;
+}
+
+.calculator {
+    background-color: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+}
+
+.subtract-btn {
+    background: linear-gradient(135deg, #ff5a5f, #ef4444);
+    color: white;
+}
+
+.multiply-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.divide-btn {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+}
+
+.remainder-btn {
+    background: linear-gradient(135deg, #a855f7, #7e22ce);
+    color: white;
+}
+
+.power-btn {
+    background: linear-gradient(135deg, #475569, #334155);
+    color: white;
+}
+
+#result {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #2196F3;
+}
+
