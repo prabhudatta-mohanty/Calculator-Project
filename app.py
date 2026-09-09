@@ -1,6 +1,86 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import psycopg2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+def get_db_connection():
+    return psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD")
+    )
 
 app = Flask(__name__)
+
+@app.route("/get-history")
+def get_history():
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT expression, result, created_at
+        FROM calculator_history
+        ORDER BY id DESC
+    """)
+
+    history = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return {
+        "history": [
+            {
+                "expression": row[0],
+                "result": row[1],
+                "created_at": row[2].strftime("%Y-%m-%d %H:%M:%S")
+            }
+            for row in history
+        ]
+    }
+
+@app.route("/clear-history", methods=["DELETE"])
+def clear_history():
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM calculator_history")
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+    return "History cleared successfully"
+
+@app.route("/save-calculation", methods=["POST"])
+def save_calculation():
+
+    data = request.get_json()
+
+    expression = data["expression"]
+    result = data["result"]
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO calculator_history (expression, result) VALUES (%s, %s)",
+        (expression, result)
+    )
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+    return "Calculation saved successfully"
 
 @app.route("/")
 def home():

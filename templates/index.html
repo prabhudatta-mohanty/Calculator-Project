@@ -11,26 +11,54 @@
 
     <div class="calculator">
 
-        <h1>My Calculator</h1>
+        <!-- Calculator Display -->
+        <div class="display">
+            <div id="expression"></div>
+            <div id="result">0</div>
+        </div>
 
-        <input type="number" id="num1" placeholder="Enter first number">
-
-        <input type="number" id="num2" placeholder="Enter second number">
-
-        <br><br>
-
+        <!-- Calculator Buttons -->
         <div class="button-grid">
 
-            <button class="add-btn" onclick="calculate('add')">＋ Add</button>
-            <button class="subtract-btn" onclick="calculate('subtract')">− Subtract</button>
-            <button class="multiply-btn" onclick="calculate('multiply')">× Multiply</button>
-            <button class="divide-btn" onclick="calculate('divide')">÷ Divide</button>
-            <button class="remainder-btn" onclick="calculate('remainder')">% Remainder</button>
-            <button class="power-btn" onclick="calculate('power')">^ Power</button>
+            <button class="clear-btn">C</button>
+            <button class="operator-btn">%</button>
+            <button class="operator-btn">^</button>
+            <button class="operator-btn">÷</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator-btn">×</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator-btn">−</button>
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operator-btn">+</button>
+
+            <button>00</button>
+            <button>0</button>
+            <button>.</button>
+            <button class="equal-btn">=</button>
 
         </div>
 
-        <h2 id="result">Result: </h2>
+        <!-- History -->
+        <div class="history">
+            <h2>History</h2>
+
+            <button class="clear-history-btn" onclick="clearHistory()">
+                Clear History
+            </button>
+
+            <div id="history-list">
+                <p>No calculations yet.</p>
+            </div>
+        </div>
 
     </div>
 
