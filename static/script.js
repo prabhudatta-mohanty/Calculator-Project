@@ -21,7 +21,7 @@ buttons.forEach(function (button) {
         }
 
         // Operators
-        else if (["+", "−", "×", "÷", "%", "^"].includes(value)) {
+        else if (["+", "−", "×", "÷", "%", "x²", "xʸ"].includes(value)) {
             chooseOperator(value);
         }
 
@@ -33,6 +33,10 @@ buttons.forEach(function (button) {
         // Clear button
         else if (value === "C") {
             clearCalculator();
+        }
+
+        else if (value === "⌫") {
+            backspace();
         }
     });
 });
@@ -62,7 +66,88 @@ function chooseOperator(selectedOperator) {
         return;
     }
 
-    firstNumber = Number(currentInput);
+    // Percentage
+    if (selectedOperator === "%") {
+        currentInput = String(Number(currentInput) / 100);
+        result.innerText = currentInput;
+
+        expression.innerText =
+            firstNumber + " " + operator + " " + currentInput + " =";
+
+        return;
+    }
+
+    // Square
+    if (selectedOperator === "x²") {
+        const number = Number(currentInput);
+        const answer = number ** 2;
+
+        expression.innerText = number + "² =";
+        result.innerText = answer;
+
+        currentInput = String(answer);
+        waitingForSecondNumber = true;
+
+        return;
+    }
+
+    // If an operator is already selected and
+    // second number has been entered, calculate first
+    if (firstNumber !== null && operator !== null && !waitingForSecondNumber) {
+
+        const secondNumber = Number(currentInput);
+
+        let answer;
+
+        if (operator === "+") {
+            answer = firstNumber + secondNumber;
+        }
+
+        else if (operator === "−") {
+            answer = firstNumber - secondNumber;
+        }
+
+        else if (operator === "×") {
+            answer = firstNumber * secondNumber;
+        }
+
+        else if (operator === "÷") {
+
+            if (secondNumber === 0) {
+                result.innerText = "Cannot divide by zero";
+                return;
+            }
+
+            answer = firstNumber / secondNumber;
+        }
+
+        else if (operator === "%") {
+
+            if (secondNumber === 0) {
+                result.innerText = "Cannot find remainder with zero";
+                return;
+            }
+
+            answer = firstNumber % secondNumber;
+        }
+
+        else if (operator === "xʸ") {
+            answer = firstNumber ** secondNumber;
+        }
+
+        expression.innerText =
+            firstNumber + " " + operator + " " + secondNumber + " =";
+
+        result.innerText = answer;
+
+        currentInput = String(answer);
+        firstNumber = answer;
+    }
+
+    else {
+        firstNumber = Number(currentInput);
+    }
+
     operator = selectedOperator;
 
     expression.innerText =
@@ -114,7 +199,7 @@ function calculateResult() {
         answer = firstNumber % secondNumber;
     }
 
-    else if (operator === "^") {
+    else if (operator === "xʸ") {
         answer = firstNumber ** secondNumber;
     }
 
@@ -163,6 +248,20 @@ function clearCalculator() {
 
     expression.innerText = "";
     result.innerText = "0";
+}
+
+function backspace() {
+    if (currentInput === "") {
+        return;
+    }
+
+    currentInput = currentInput.slice(0, -1);
+
+    if (currentInput === "") {
+        result.innerText = "0";
+    } else {
+        result.innerText = currentInput;
+    }
 }
 
 function showHistory() {
@@ -237,3 +336,11 @@ function clearHistory() {
 }
 
 loadHistory();
+
+function toggleHistory() {
+
+    const historyPanel = document.getElementById("history-panel");
+
+    historyPanel.classList.toggle("show");
+
+}

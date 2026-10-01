@@ -1,68 +1,97 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Calculator App</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+```
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+```
+
 </head>
 
 <body>
 
-    <div class="calculator">
+```
+<div class="calculator">
 
-        <!-- Calculator Display -->
-        <div class="display">
-            <div id="expression"></div>
-            <div id="result">0</div>
-        </div>
+    <!-- Calculator Display -->
+    <div class="display">
 
-        <!-- Calculator Buttons -->
-        <div class="button-grid">
+        <div id="expression"></div>
+        <div id="result">0</div>
 
-            <button class="clear-btn">C</button>
-            <button class="operator-btn">%</button>
-            <button class="operator-btn">^</button>
-            <button class="operator-btn">÷</button>
+    </div>
 
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="operator-btn">×</button>
+    <!-- Calculator Buttons -->
+    <div class="button-grid">
 
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button class="operator-btn">−</button>
+        <!-- Top Row -->
+        <button class="clear-btn">C</button>
+        <button class="backspace-btn">⌫</button>
+        <button class="operator-btn">%</button>
+        <button class="operator-btn">x²</button>
 
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button class="operator-btn">+</button>
+        <!-- Numbers + Operators -->
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="operator-btn">÷</button>
 
-            <button>00</button>
-            <button>0</button>
-            <button>.</button>
-            <button class="equal-btn">=</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="operator-btn">×</button>
 
-        </div>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="operator-btn">−</button>
+
+        <button>00</button>
+        <button>0</button>
+        <button>.</button>
+        <button class="operator-btn">+</button>
+
+        <!-- Power -->
+        <button class="operator-btn power-btn">xʸ</button>
 
         <!-- History -->
-        <div class="history">
+        <button class="history-btn" onclick="toggleHistory()">
+            🕘
+        </button>
+
+        <!-- Equal -->
+        <button class="equal-btn">=</button>
+
+    </div>
+
+    <!-- History Panel -->
+    <div class="history-panel" id="history-panel">
+
+        <div class="history-header">
             <h2>History</h2>
 
-            <button class="clear-history-btn" onclick="clearHistory()">
-                Clear History
+            <button class="close-history-btn" onclick="toggleHistory()">
+                ×
             </button>
+        </div>
 
-            <div id="history-list">
-                <p>No calculations yet.</p>
-            </div>
+        <button class="clear-history-btn" onclick="clearHistory()">
+            Clear History
+        </button>
+
+        <div id="history-list">
+            <p>No calculations yet.</p>
         </div>
 
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+```
 
 </body>
 
